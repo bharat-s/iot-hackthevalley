@@ -1,4 +1,5 @@
 import json
+import requests
 
 filename = 'outputfile.txt'
 f = open(filename)
@@ -11,6 +12,11 @@ for i in f:
 for item in lst[1:]:
     if item == '1':
         count += 1
-count = str(count)
-var = json.dumps(count)
-print(var)
+
+print(count)
+
+r = requests.post(
+    url = 'http://localhost:3000/add',
+    data = { 'count': count }
+)
+print(r.text)
