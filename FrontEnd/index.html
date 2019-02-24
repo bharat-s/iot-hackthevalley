@@ -216,10 +216,6 @@
                       <i class="fas fa-donate text-white"></i>
                     </div>
                   </div>
-                  <div>
-                    <div class="small text-gray-500">December 7, 2019</div>
-                    $290.29 has been deposited into your account!
-                  </div>
                 </a>
                 <a class="dropdown-item d-flex align-items-center" href="#">
                   <div class="mr-3">
@@ -362,29 +358,9 @@
                 <div class="card-body">
                   <div class="chart-area" style = "display: block; height: 320px; width: 782px;" width = "977" height = "400">
                     <body>
-                      <!--
-                          <form action="http://localhost:3000/example" method="POST">
-                              First name: <input type="text" name="fname"><br>
-                              Last name: <input type="text" name="lname"><br>
-                                  <input type="submit" value="Submit">
-                          </form>
-                      <script>
-                          async function getNumPeople() {
-                          const res = await fetch('http://localhost:3000/room')
-                          const body = await res.json()
-                          console.log(body.numPeople)
-                      }
-                      </script> 
-                      -->
-                  
-                      <input type="file" id="fileinput" onclick="createchart();"/> 
-                      
-                      <input id="clickMe" type="button" value="Refresh" onclick="doFunction();" />
-                    
-                        
+                                      
                         <div id="chartContainer" style="height: 300px; width: 782px;"></div>
                         <script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
-                        <p id="myLink" href="test.html"> Testing </p>
                     
                     </body>
                   </div>
@@ -458,6 +434,20 @@
   <script src="js/demo/chart-area-demo.js"></script>
   <script src="js/demo/chart-pie-demo.js"></script>
   <script>
+    const getNumPeople = $.ajax({
+      method: 'GET',
+      url: 'http://localhost:3000/:index',
+
+    }).done((data) => {
+      console.log(JSON.stringify(data));
+    })
+
+    /*const getNumPeople = async () => {
+      const res = await fetch('http://localhost:3000/:index')
+      const body = await res.json()
+      console.log(JSON.stringify(body))
+    }*/
+
     const getData = async () => {
       const res = await fetch('http://localhost:3000');
       const data = await res.json();
@@ -466,9 +456,11 @@
 
     window.onload = () => {
       createchart();
+      getNumPeople();
       getData();
       window.setInterval(
         () => getData(),
+        () => getNumPeople(),
         2000
       )
     }
@@ -482,12 +474,12 @@
         axisY: {
             title: "Number of Students",
             includeZero: false,
-            valueFormatString: "$##0.00",
+            valueFormatString: "##0",
             crosshair: {
                 enabled: true,
                 snapToDataPoint: true,
                 labelFormatter: function(e) {
-                    return "$" + CanvasJS.formatNumber(e.value, "##0.00");
+                    return CanvasJS.formatNumber(e.value, "##0");
                 }
             }
         },
@@ -536,12 +528,12 @@
           axisY: {
               title: "Number of Students",
               includeZero: false,
-              valueFormatString: "$##0.00",
+              valueFormatString: "##0",
               crosshair: {
                   enabled: true,
                   snapToDataPoint: true,
                   labelFormatter: function(e) {
-                      return "$" + CanvasJS.formatNumber(e.value, "##0.00");
+                      return CanvasJS.formatNumber(e.value, "##0");
                   }
               }
           },
@@ -578,6 +570,8 @@
       chart.render();
 
     }
+
+
   </script>
 
 </body>
