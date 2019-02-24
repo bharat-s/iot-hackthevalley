@@ -193,7 +193,6 @@
               <a class="nav-link dropdown-toggle" href="#" id="alertsDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                 <i class="fas fa-bell fa-fw"></i>
                 <!-- Counter - Alerts -->
-                <span class="badge badge-danger badge-counter">3+</span>
               </a>
               <!-- Dropdown - Alerts -->
               <div class="dropdown-list dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="alertsDropdown">
@@ -242,7 +241,6 @@
               <a class="nav-link dropdown-toggle" href="#" id="messagesDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                 <i class="fas fa-envelope fa-fw"></i>
                 <!-- Counter - Messages -->
-                <span class="badge badge-danger badge-counter">7</span>
               </a>
               <!-- Dropdown - Messages -->
               <div class="dropdown-list dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="messagesDropdown">
@@ -298,8 +296,8 @@
             <!-- Nav Item - User Information -->
             <li class="nav-item dropdown no-arrow">
               <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                <span class="mr-2 d-none d-lg-inline text-gray-600 small">Valerie Luna</span>
-                <img class="img-profile rounded-circle" src="https://source.unsplash.com/QAB-WJcbgJk/60x60">
+                <span class="mr-2 d-none d-lg-inline text-gray-600 small">User</span>
+                <img class="img-profile rounded-circle">
               </a>
               <!-- Dropdown - User Information -->
               <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="userDropdown">
@@ -335,241 +333,49 @@
           <div class="d-sm-flex align-items-center justify-content-between mb-4">
             <h1 class="h3 mb-0 text-gray-800">Dashboard</h1>
             <a href="#" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i class="fas fa-download fa-sm text-white-50"></i> Generate Report</a>
-
           </div>
 
           <!-- Content Row -->
+
           <div class="row">
 
-            <!-- Content Column -->
-            <div class="col-lg-6 mb-4">
-
-              <!-- Project Card Example -->
-              <body>
-                <!--
-                    <form action="http://localhost:3000/example" method="POST">
-                        First name: <input type="text" name="fname"><br>
-                        Last name: <input type="text" name="lname"><br>
-                            <input type="submit" value="Submit">
-                    </form>
-                <script>
-                    async function getNumPeople() {
-                    const res = await fetch('http://localhost:3000/room')
-                    const body = await res.json()
-                    console.log(body.numPeople)
-                }
-                </script> 
-                -->
-            
-                <input type="file" id="fileinput" onclick="createchart();"/> 
-              </body>
-              
-              <body>
-                  <input id="clickMe" type="button" value="clickme" onclick="doFunction();" />
-              
-                  <script type="text/javascript">
-              
-                      var contents = 0;
-                      var t = 10;
-                  
-                      function readSingleFile(evt) {
-                          //Retrieve the first (and only!) File from the FileList object
-                          var f = evt.target.files[0]; 
-                  
-                          if (f) {
-                              var r = new FileReader();
-                              r.onload = function(e) { 
-                                  contents = e.target.result;
-                                  t = parseInt(contents.substr(0, 3), 10);
-                              }
-                              r.readAsText(f);
-                          } 
-                          else { 
-                              alert("Failed to load file");
-                          }
-                      }
-                  
-                      createchart = function() {
-                          var chart = new CanvasJS.Chart("chartContainer", {
-                          animationEnabled: true,
-                          exportEnabled: true,
-                          theme: "light1", // "light1", "light2", "dark1", "dark2"
-                          title:{
-                              text: "Room Population at UTSC",
-                          },
-                          axisY: {
-                              title: "Number of Students",
-                              includeZero: false,
-                              valueFormatString: "$##0.00",
-                              crosshair: {
-                                  enabled: true,
-                                  snapToDataPoint: true,
-                                  labelFormatter: function(e) {
-                                      return "$" + CanvasJS.formatNumber(e.value, "##0.00");
-                                  }
-                              }
-                          },
-                          axisX:{
-                              title: "Room Name",
-                              valueFormatString: "Library",
-                              crosshair: {
-                                  enabled: true,
-                                  snapToDataPoint: true
-                              }
-                          },
-                          data: [{
-                              type: "column", //change type to bar, line, area, pie, etc
-                              //indexLabel: "{y}", //Shows y value on all Data Points
-                              indexLabelFontColor: "#5A5757",
-                              indexLabelPlacement: "outside",
-                              dataPoints: [
-                                  { x: 10, y: 71 },
-                                  { x: 20, y: 55 },
-                                  { x: 30, y: 50 },
-                                  { x: 40, y: 65 },
-                                  { x: 50, y: 92 }, //indexLabel: "Highest" },
-                                  { x: 60, y: t },
-                                  { x: 70, y: 38 },
-                                  { x: 80, y: 71 },
-                                  { x: 90, y: 54 },
-                                  { x: 100, y: 60 },
-                                  { x: 110, y: 36 },
-                                  { x: 120, y: 49 },
-                                  { x: 130, y: 21 }, //indexLabel: "Lowest" }
-                              ]
-                          }]
-                      });
-                      chart.render();
-              
-                      };
-                      document.getElementById('fileinput').addEventListener('change', readSingleFile, false);
-                  
-                  
-                      doFunction = function() {
-                          //when the document is finished loading, replace everything
-                          //between the <a ...> </a> tags with the value of splitText
-                          document.getElementById("myLink").innerHTML=contents.substr(0, 3);
-              
-                      var chart = new CanvasJS.Chart("chartContainer", {
-                          animationEnabled: true,
-                          exportEnabled: true,
-                          theme: "light1", // "light1", "light2", "dark1", "dark2"
-                          title:{
-                              text: "Room Population at UTSC",
-                          },
-                          axisY: {
-                              title: "Number of Students",
-                              includeZero: false,
-                              valueFormatString: "$##0.00",
-                              crosshair: {
-                                  enabled: true,
-                                  snapToDataPoint: true,
-                                  labelFormatter: function(e) {
-                                      return "$" + CanvasJS.formatNumber(e.value, "##0.00");
-                                  }
-                              }
-                          },
-                          axisX:{
-                              title: "Room Name",
-                              valueFormatString: "Library",
-                              crosshair: {
-                                  enabled: true,
-                                  snapToDataPoint: true
-                              }
-                          },
-                          data: [{
-                              type: "column", //change type to bar, line, area, pie, etc
-                              //indexLabel: "{y}", //Shows y value on all Data Points
-                              indexLabelFontColor: "#5A5757",
-                              indexLabelPlacement: "outside",
-                              dataPoints: [
-                                  { x: 10, y: 71 },
-                                  { x: 20, y: 55 },
-                                  { x: 30, y: 50 },
-                                  { x: 40, y: 65 },
-                                  { x: 50, y: 92 }, //indexLabel: "Highest" },
-                                  { x: 60, y: 45 },
-                                  { x: 70, y: 38 },
-                                  { x: 80, y: 71 },
-                                  { x: 90, y: 54 },
-                                  { x: 100, y: 60 },
-                                  { x: 110, y: 36 },
-                                  { x: 120, y: 49 },
-                                  { x: 130, y: t }, //indexLabel: "Lowest" }
-                              ]
-                          }]
-                      });
-                      chart.render();
-              
-                      }
-                  </script>
-              
-                  
-                  <div id="chartContainer" style="height: 370px; width: 100%;"></div>
-                  <script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
-                  <p id="myLink" href="test.html"> Testing </p>
-              
-              </body>
-
-              <!-- Color System -->
-              <div class="row">
-                <div class="col-lg-6 mb-4">
-                  <div class="card bg-primary text-white shadow">
-                    <div class="card-body">
-                      Primary
-                      <div class="text-white-50 small">#4e73df</div>
+            <!-- Area Chart -->
+            <div class="col-xl-8 col-lg-7">
+              <div class="card shadow mb-4">
+                <!-- Card Header - Dropdown -->
+                <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+                  <h6 class="m-0 font-weight-bold text-primary">Earnings Overview</h6>
+                  <div class="dropdown no-arrow">
+                    <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                      <i class="fas fa-ellipsis-v fa-sm fa-fw text-gray-400"></i>
+                    </a>
+                    <div class="dropdown-menu dropdown-menu-right shadow animated--fade-in" aria-labelledby="dropdownMenuLink">
+                      <div class="dropdown-header">Dropdown Header:</div>
+                      <a class="dropdown-item" href="#">Action</a>
+                      <a class="dropdown-item" href="#">Another action</a>
+                      <div class="dropdown-divider"></div>
+                      <a class="dropdown-item" href="#">Something else here</a>
                     </div>
                   </div>
                 </div>
-                <div class="col-lg-6 mb-4">
-                  <div class="card bg-success text-white shadow">
-                    <div class="card-body">
-                      Success
-                      <div class="text-white-50 small">#1cc88a</div>
-                    </div>
-                  </div>
-                </div>
-                <div class="col-lg-6 mb-4">
-                  <div class="card bg-info text-white shadow">
-                    <div class="card-body">
-                      Info
-                      <div class="text-white-50 small">#36b9cc</div>
-                    </div>
-                  </div>
-                </div>
-                <div class="col-lg-6 mb-4">
-                  <div class="card bg-warning text-white shadow">
-                    <div class="card-body">
-                      Warning
-                      <div class="text-white-50 small">#f6c23e</div>
-                    </div>
-                  </div>
-                </div>
-                <div class="col-lg-6 mb-4">
-                  <div class="card bg-danger text-white shadow">
-                    <div class="card-body">
-                      Danger
-                      <div class="text-white-50 small">#e74a3b</div>
-                    </div>
-                  </div>
-                </div>
-                <div class="col-lg-6 mb-4">
-                  <div class="card bg-secondary text-white shadow">
-                    <div class="card-body">
-                      Secondary
-                      <div class="text-white-50 small">#858796</div>
-                    </div>
+                <!-- Card Body -->
+                <div class="card-body">
+                  <div class="chart-area">
+                    <canvas id="myAreaChart"></canvas>
                   </div>
                 </div>
               </div>
-
             </div>
 
-            <div class="col-lg-6 mb-4">
-
-              
-
-              
+              <!-- Approach -->
+              <div class="card shadow mb-4">
+                <div class="card-header py-3">
+                  <h6 class="m-0 font-weight-bold text-primary">IOT - Hack the Valley</h6>
+                </div>
+                <div class="card-body">
+                  <p>A project by Srishti Ahuja, Saransh Jain, Mehal Patel and Bharat Shamsukha.</p>
+                </div>
+              </div>
 
             </div>
           </div>
@@ -579,16 +385,6 @@
 
       </div>
       <!-- End of Main Content -->
-
-      <!-- Footer -->
-      <footer class="sticky-footer bg-white">
-        <div class="container my-auto">
-          <div class="copyright text-center my-auto">
-            <span>Copyright &copy; Your Website 2019</span>
-          </div>
-        </div>
-      </footer>
-      <!-- End of Footer -->
 
     </div>
     <!-- End of Content Wrapper -->
