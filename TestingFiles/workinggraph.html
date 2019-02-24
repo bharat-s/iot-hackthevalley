@@ -1,0 +1,168 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <!--
+        <form action="http://localhost:3000/example" method="POST">
+            First name: <input type="text" name="fname"><br>
+            Last name: <input type="text" name="lname"><br>
+                <input type="submit" value="Submit">
+        </form>
+    <script>
+        async function getNumPeople() {
+        const res = await fetch('http://localhost:3000/room')
+        const body = await res.json()
+        console.log(body.numPeople)
+    }
+    </script> 
+    -->
+
+    <input type="file" id="fileinput" onclick="createchart();"/> 
+</head>
+
+<body>
+    <input id="clickMe" type="button" value="clickme" onclick="doFunction();" />
+
+    <script type="text/javascript">
+
+        var contents = 0;
+        var t = 10;
+    
+        function readSingleFile(evt) {
+            //Retrieve the first (and only!) File from the FileList object
+            var f = evt.target.files[0]; 
+    
+            if (f) {
+                var r = new FileReader();
+                r.onload = function(e) { 
+                    contents = e.target.result;
+                    t = parseInt(contents.substr(0, 3), 10);
+                }
+                r.readAsText(f);
+            } 
+            else { 
+                alert("Failed to load file");
+            }
+        }
+    
+        createchart = function() {
+            var chart = new CanvasJS.Chart("chartContainer", {
+            animationEnabled: true,
+            exportEnabled: true,
+            theme: "light1", // "light1", "light2", "dark1", "dark2"
+            title:{
+                text: "Room Population at UTSC",
+            },
+            axisY: {
+                title: "Number of Students",
+                includeZero: false,
+                valueFormatString: "$##0.00",
+                crosshair: {
+                    enabled: true,
+                    snapToDataPoint: true,
+                    labelFormatter: function(e) {
+                        return "$" + CanvasJS.formatNumber(e.value, "##0.00");
+                    }
+                }
+            },
+            axisX:{
+                title: "Room Name",
+                valueFormatString: "Library",
+                crosshair: {
+                    enabled: true,
+                    snapToDataPoint: true
+                }
+            },
+            data: [{
+                type: "column", //change type to bar, line, area, pie, etc
+                //indexLabel: "{y}", //Shows y value on all Data Points
+                indexLabelFontColor: "#5A5757",
+                indexLabelPlacement: "outside",
+                dataPoints: [
+                    { x: 10, y: 71 },
+                    { x: 20, y: 55 },
+                    { x: 30, y: 50 },
+                    { x: 40, y: 65 },
+                    { x: 50, y: 92 }, //indexLabel: "Highest" },
+                    { x: 60, y: t },
+                    { x: 70, y: 38 },
+                    { x: 80, y: 71 },
+                    { x: 90, y: 54 },
+                    { x: 100, y: 60 },
+                    { x: 110, y: 36 },
+                    { x: 120, y: 49 },
+                    { x: 130, y: 21 }, //indexLabel: "Lowest" }
+                ]
+            }]
+        });
+        chart.render();
+
+        };
+        document.getElementById('fileinput').addEventListener('change', readSingleFile, false);
+    
+    
+        doFunction = function() {
+            //when the document is finished loading, replace everything
+            //between the <a ...> </a> tags with the value of splitText
+            document.getElementById("myLink").innerHTML=contents.substr(0, 3);
+
+        var chart = new CanvasJS.Chart("chartContainer", {
+            animationEnabled: true,
+            exportEnabled: true,
+            theme: "light1", // "light1", "light2", "dark1", "dark2"
+            title:{
+                text: "Room Population at UTSC",
+            },
+            axisY: {
+                title: "Number of Students",
+                includeZero: false,
+                valueFormatString: "$##0.00",
+                crosshair: {
+                    enabled: true,
+                    snapToDataPoint: true,
+                    labelFormatter: function(e) {
+                        return "$" + CanvasJS.formatNumber(e.value, "##0.00");
+                    }
+                }
+            },
+            axisX:{
+                title: "Room Name",
+                valueFormatString: "Library",
+                crosshair: {
+                    enabled: true,
+                    snapToDataPoint: true
+                }
+            },
+            data: [{
+                type: "column", //change type to bar, line, area, pie, etc
+                //indexLabel: "{y}", //Shows y value on all Data Points
+                indexLabelFontColor: "#5A5757",
+                indexLabelPlacement: "outside",
+                dataPoints: [
+                    { x: 10, y: 71 },
+                    { x: 20, y: 55 },
+                    { x: 30, y: 50 },
+                    { x: 40, y: 65 },
+                    { x: 50, y: 92 }, //indexLabel: "Highest" },
+                    { x: 60, y: 45 },
+                    { x: 70, y: 38 },
+                    { x: 80, y: 71 },
+                    { x: 90, y: 54 },
+                    { x: 100, y: 60 },
+                    { x: 110, y: 36 },
+                    { x: 120, y: 49 },
+                    { x: 130, y: t }, //indexLabel: "Lowest" }
+                ]
+            }]
+        });
+        chart.render();
+
+        }
+    </script>
+
+    
+    <div id="chartContainer" style="height: 370px; width: 100%;"></div>
+    <script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
+    <p id="myLink" href="test.html"> Testing </p>
+
+</body>
+</html>
