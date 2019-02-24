@@ -1,16 +1,17 @@
 var express = require('express');
+var cors = require('cors');
 var app = express();
 var bodyParser = require('body-parser');
-var trial = '7';
+var trial = 7;
+app.use(bodyParser.urlencoded({ extended: true }));
+app.use(cors());
 
 app.get('/', function(req, res) {
-    res.send(trial)
+    res.json({ data: trial });
 });
 
-app.use(bodyParser.urlencoded({ extended: true })); 
-
 app.get('/example', (req, res) => {
-    res.send('hello world')
+    res.json({ data: 'bai world' });
 });
 
 app.post('/example', (req, res) => {

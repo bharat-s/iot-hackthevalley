@@ -344,7 +344,7 @@
               <div class="card shadow mb-4">
                 <!-- Card Header - Dropdown -->
                 <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-                  <h6 class="m-0 font-weight-bold text-primary">Earnings Overview</h6>
+                  <h6 class="m-0 font-weight-bold text-primary">Room Population</h6>
                   <div class="dropdown no-arrow">
                     <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                       <i class="fas fa-ellipsis-v fa-sm fa-fw text-gray-400"></i>
@@ -360,8 +360,33 @@
                 </div>
                 <!-- Card Body -->
                 <div class="card-body">
-                  <div class="chart-area">
-                    <canvas id="myAreaChart"></canvas>
+                  <div class="chart-area" style = "display: block; height: 320px; width: 782px;" width = "977" height = "400">
+                    <body>
+                      <!--
+                          <form action="http://localhost:3000/example" method="POST">
+                              First name: <input type="text" name="fname"><br>
+                              Last name: <input type="text" name="lname"><br>
+                                  <input type="submit" value="Submit">
+                          </form>
+                      <script>
+                          async function getNumPeople() {
+                          const res = await fetch('http://localhost:3000/room')
+                          const body = await res.json()
+                          console.log(body.numPeople)
+                      }
+                      </script> 
+                      -->
+                  
+                      <input type="file" id="fileinput" onclick="createchart();"/> 
+                      
+                      <input id="clickMe" type="button" value="Refresh" onclick="doFunction();" />
+                    
+                        
+                        <div id="chartContainer" style="height: 300px; width: 782px;"></div>
+                        <script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
+                        <p id="myLink" href="test.html"> Testing </p>
+                    
+                    </body>
                   </div>
                 </div>
               </div>
@@ -432,6 +457,128 @@
   <!-- Page level custom scripts -->
   <script src="js/demo/chart-area-demo.js"></script>
   <script src="js/demo/chart-pie-demo.js"></script>
+  <script>
+    const getData = async () => {
+      const res = await fetch('http://localhost:3000');
+      const data = await res.json();
+      doFunction(data.data);
+    }
+
+    window.onload = () => {
+      createchart();
+      getData();
+      window.setInterval(
+        () => getData(),
+        2000
+      )
+    }
+
+
+    createchart = function() {
+        var chart = new CanvasJS.Chart("chartContainer", {
+        animationEnabled: true,
+        exportEnabled: true,
+        theme: "light1", // "light1", "light2", "dark1", "dark2"
+        axisY: {
+            title: "Number of Students",
+            includeZero: false,
+            valueFormatString: "$##0.00",
+            crosshair: {
+                enabled: true,
+                snapToDataPoint: true,
+                labelFormatter: function(e) {
+                    return "$" + CanvasJS.formatNumber(e.value, "##0.00");
+                }
+            }
+        },
+        axisX:{
+            title: "Room Name",
+            valueFormatString: "Library",
+            crosshair: {
+                enabled: true,
+                snapToDataPoint: true
+            }
+        },
+        data: [{
+            type: "column", //change type to bar, line, area, pie, etc
+            //indexLabel: "{y}", //Shows y value on all Data Points
+            indexLabelFontColor: "#5A5757",
+            indexLabelPlacement: "outside",
+            dataPoints: [
+                { x: 10, y: 71 },
+                { x: 20, y: 55 },
+                { x: 30, y: 50 },
+                { x: 40, y: 65 },
+                { x: 50, y: 92 }, //indexLabel: "Highest" },
+                { x: 60, y: 10 },
+                { x: 70, y: 38 },
+                { x: 80, y: 71 },
+                { x: 90, y: 54 },
+                { x: 100, y: 60 },
+                { x: 110, y: 36 },
+                { x: 120, y: 49 },
+                { x: 130, y: 10 }, //indexLabel: "Lowest" }
+            ]
+        }]
+      });
+      chart.render();
+
+    };
+
+
+
+    doFunction = function(t) {
+
+      var chart = new CanvasJS.Chart("chartContainer", {
+          animationEnabled: true,
+          exportEnabled: true,
+          theme: "light1", // "light1", "light2", "dark1", "dark2"
+          axisY: {
+              title: "Number of Students",
+              includeZero: false,
+              valueFormatString: "$##0.00",
+              crosshair: {
+                  enabled: true,
+                  snapToDataPoint: true,
+                  labelFormatter: function(e) {
+                      return "$" + CanvasJS.formatNumber(e.value, "##0.00");
+                  }
+              }
+          },
+          axisX:{
+              title: "Room Name",
+              valueFormatString: "Library",
+              crosshair: {
+                  enabled: true,
+                  snapToDataPoint: true
+              }
+          },
+          data: [{
+              type: "column", //change type to bar, line, area, pie, etc
+              //indexLabel: "{y}", //Shows y value on all Data Points
+              indexLabelFontColor: "#5A5757",
+              indexLabelPlacement: "outside",
+              dataPoints: [
+                  { x: 10, y: 71 },
+                  { x: 20, y: 55 },
+                  { x: 30, y: 50 },
+                  { x: 40, y: 65 },
+                  { x: 50, y: 92 }, //indexLabel: "Highest" },
+                  { x: 60, y: 45 },
+                  { x: 70, y: 38 },
+                  { x: 80, y: 71 },
+                  { x: 90, y: 54 },
+                  { x: 100, y: 60 },
+                  { x: 110, y: 36 },
+                  { x: 120, y: 49 },
+                  { x: 130, y: t }, //indexLabel: "Lowest" }
+              ]
+          }]
+      });
+      chart.render();
+
+    }
+  </script>
 
 </body>
 
